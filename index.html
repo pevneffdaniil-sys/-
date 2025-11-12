@@ -6,6 +6,21 @@
     <title>Portfolio Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-theme {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,13 +33,13 @@
                 </button>
 
                 <ul class="nav-links">
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#about" class="nav-link">About Me</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
                 </ul>
 
-                <button class="contact-btn">Contact</button>
+                <button class="contact-btn" id="contactBtn">Contact</button>
             </header>
 
             <div class="about-content-container">
@@ -212,7 +227,7 @@
             </div>
         </section>
 
-<section class="section-5">
+<section class="section-5" id="contacts">
     <h3 class="contact-title">contacts</h3>
 
     <h2 class="contact-heading">Contact With Me</h2>
@@ -267,10 +282,10 @@
 
 <section class="section-6">
     <nav class="footer-nav">
-        <a href="#about">About Me</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
+        <a href="#about" class="nav-link">About Me</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
     </nav>
 
     <div class="separator separator-1"></div>
@@ -280,10 +295,47 @@
     <p class="footer-year">2025-2026 IT HEXLET</p>
     <p class="footer-description">This project is a practical project for mastering the structure and style of a web page.</p>
 
-    <a href="#" class="back-to-top">Back to top</a>
+    <a href="#about" class="back-to-top nav-link">Back to top</a>
 </section>
 
     <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#about' || this.classList.contains('back-to-top')) {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+        document.getElementById('contactBtn').addEventListener('click', function() {
+            const contactsSection = document.getElementById('contacts');
+            if (contactsSection) {
+                contactsSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         themeToggle.addEventListener('click', function() {
